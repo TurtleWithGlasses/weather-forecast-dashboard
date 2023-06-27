@@ -9,9 +9,13 @@ option = st.selectbox("Select data to view",
                       ("Temperature", "Sky"))
 st.subheader(f"{option} for the next {days} day(s) in {place}")
 
-dates = ["2022-25-10", "2022-26-10", "2022-27-10"]
-temperatures = [10,11,15]
-temperatures = [days * i for i in temperatures]
+def get_data(days):
+    dates = ["2022-25-10", "2022-26-10", "2022-27-10"]
+    temperatures = [10,11,15]
+    temperatures = [days * i for i in temperatures]
+    return dates, temperatures
 
-figure = px.line(x=dates, y=temperatures, labels={"x":"Date", "y":"Temperature(C)"})
+d, t = get_data(days)
+
+figure = px.line(x=d, y=t, labels={"x":"Date", "y":"Temperature(C)"})
 st.plotly_chart(figure)
